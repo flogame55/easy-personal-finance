@@ -3,7 +3,7 @@
 A clean, dark-themed personal finance dashboard built with React + Vite.
 
 ## Features
-- 📷 **Receipt OCR** — drag & drop a receipt photo; Tesseract.js reads it locally (no server)
+- 📷 **Receipt OCR (Thai Support)** — drag & drop a receipt photo or Thai banking slip; Tesseract.js reads it locally (no server). Automatically parses Thai dates (Buddhist year conversion) and filters Thai banking headers.
 - ✏ **Manual entry** — log expenses or income with category in seconds
 - 🎯 **Budget limits** — set per-category monthly ceilings with live progress bars & warnings
 - 💰 **Fixed salary** — set your monthly salary once, edit any time
