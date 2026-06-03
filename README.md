@@ -2,8 +2,6 @@
 
 Moneta is a clean, premium dark-themed personal finance dashboard built with **React** and **Vite**. Designed for speed, privacy, and ease of use, it runs entirely in your browser with zero server dependencies.
 
-![Moneta Screenshot](https://via.placeholder.com/800x400.png?text=Moneta+Finance+Dashboard)
-
 ## ✨ Core Features
 
 *   📷 **Receipt OCR (Thai & English)** — Drag & drop a receipt photo or Thai banking slip. Tesseract.js reads it locally on your device. Automatically parses Thai dates (Buddhist year conversion) and filters out banking headers.
