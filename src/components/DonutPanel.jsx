@@ -22,23 +22,28 @@ export default function DonutPanel({ txns, month }) {
       {total > 0 ? (
         <>
           <div style={{ position: 'relative', height: 150 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie data={data} cx="50%" cy="50%" innerRadius={44} outerRadius={62} dataKey="value" paddingAngle={2}>
-                  {data.map((d, i) => <Cell key={i} fill={d.color} strokeWidth={0} />)}
-                </Pie>
-                <Tooltip
-                  formatter={(v) => fmt(v)}
-                  contentStyle={{ background: '#0d1117', border: '1px solid #1e2537', borderRadius: 8, fontSize: 12, color: '#e2e8f0' }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
             <div style={{
               position: 'absolute', top: '50%', left: '50%',
               transform: 'translate(-50%,-50%)', textAlign: 'center', pointerEvents: 'none',
+              zIndex: 0
             }}>
               <div style={{ fontSize: 10, color: '#475569' }}>spent</div>
               <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0' }}>{fmt(total)}</div>
+            </div>
+            <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 10 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={data} cx="50%" cy="50%" innerRadius={44} outerRadius={62} dataKey="value" paddingAngle={2}>
+                    {data.map((d, i) => <Cell key={i} fill={d.color} strokeWidth={0} />)}
+                  </Pie>
+                  <Tooltip
+                    formatter={(v) => fmt(v)}
+                    contentStyle={{ background: '#0d1117', border: '1px solid #1e2537', borderRadius: 8, fontSize: 12, color: '#e2e8f0', zIndex: 100 }}
+                    itemStyle={{ color: '#e2e8f0' }}
+                    labelStyle={{ display: 'none' }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
           </div>
 

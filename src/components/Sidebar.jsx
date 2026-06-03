@@ -9,7 +9,7 @@ const NAV = [
 
 export default function Sidebar({ page, setPage }) {
   return (
-    <aside style={S.sidebar}>
+    <aside className="sidebar-nav" style={S.sidebar}>
       <div style={S.logo}>
         <span style={S.logoMark}>M</span>
         <div>

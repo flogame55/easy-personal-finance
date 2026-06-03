@@ -70,7 +70,7 @@ export default function OverviewPage({ txns, salary, onAdd, onDelete, onUpdate, 
       </div>
 
       {/* stat cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
+      <div className="responsive-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
         <StatCard 
           label={balanceView === 'monthly' ? "Monthly Balance" : "Total Balance"}
           value={fmt(balanceView === 'monthly' ? balance : allTimeBalance)}
@@ -83,7 +83,7 @@ export default function OverviewPage({ txns, salary, onAdd, onDelete, onUpdate, 
       </div>
 
       {/* add panel + donut */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 220px', gap: 14 }}>
+      <div className="responsive-grid-panel" style={{ display: 'grid', gridTemplateColumns: '1fr 220px', gap: 14 }}>
         <AddPanel onAdd={onAdd} />
         <DonutPanel txns={txns} month={month} />
       </div>

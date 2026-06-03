@@ -181,7 +181,13 @@ export default function AddPanel({ onAdd }) {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <button onClick={cancelScan} style={S.btnGhost}>Cancel</button>
-                <button onClick={confirmScan} style={S.btnPrimary}>✓ Confirm</button>
+                <button 
+                  onClick={confirmScan} 
+                  disabled={!(parseFloat(scanAmt) > 0)}
+                  style={{ ...S.btnPrimary, opacity: parseFloat(scanAmt) > 0 ? 1 : 0.5, cursor: parseFloat(scanAmt) > 0 ? 'pointer' : 'not-allowed' }}
+                >
+                  ✓ Confirm
+                </button>
               </div>
             </div>
           )}
@@ -219,7 +225,13 @@ export default function AddPanel({ onAdd }) {
               <CatGrid selected={cat} onSelect={setCat} />
             </div>
           )}
-          <button onClick={submitManual} style={S.btnPrimary}>+ Add transaction</button>
+          <button 
+            onClick={submitManual} 
+            disabled={!(parseFloat(amt) > 0)}
+            style={{ ...S.btnPrimary, opacity: parseFloat(amt) > 0 ? 1 : 0.5, cursor: parseFloat(amt) > 0 ? 'pointer' : 'not-allowed' }}
+          >
+            + Add transaction
+          </button>
         </div>
       )}
     </div>

@@ -39,14 +39,24 @@ export default function TxnRow({ txn, onDelete, onUpdate }) {
         </div>
         <div style={S.fg}>
           <label style={S.lbl}>Category</label>
-          <select value={editCat} onChange={e => setEditCat(e.target.value)} style={{ ...S.input, marginBottom: 12 }}>
+          <select 
+            value={editCat} 
+            onChange={e => setEditCat(e.target.value)} 
+            style={{ ...S.input, marginBottom: 12, colorScheme: 'dark' }}
+          >
             {txn.type === 'expense' && CATS.map(c => <option key={c} value={c}>{c}</option>)}
             {txn.type === 'income' && <option value="Income">Income</option>}
           </select>
         </div>
         <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
           <button onClick={() => setIsEditing(false)} style={S.btnGhost}>Cancel</button>
-          <button onClick={handleSave} style={{ ...S.btnPrimary, width: 'auto' }}>Save</button>
+          <button 
+            onClick={handleSave} 
+            disabled={!(parseFloat(editAmt) > 0)}
+            style={{ ...S.btnPrimary, width: 'auto', opacity: parseFloat(editAmt) > 0 ? 1 : 0.5, cursor: parseFloat(editAmt) > 0 ? 'pointer' : 'not-allowed' }}
+          >
+            Save
+          </button>
         </div>
       </div>
     )

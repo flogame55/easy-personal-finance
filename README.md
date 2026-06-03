@@ -1,49 +1,42 @@
-# 💰 Easy Personal Finance (Moneta)
+# 💰 Moneta: Personal Finance Dashboard
 
-A clean, dark-themed personal finance dashboard built with React + Vite.
+Moneta is a clean, premium dark-themed personal finance dashboard built with **React** and **Vite**. Designed for speed, privacy, and ease of use, it runs entirely in your browser with zero server dependencies.
 
-## Features
-- 📷 **Receipt OCR (Thai Support)** — drag & drop a receipt photo or Thai banking slip; Tesseract.js reads it locally (no server). Automatically parses Thai dates (Buddhist year conversion) and filters Thai banking headers.
-- ✏ **Manual entry** — log expenses or income with category in seconds
-- 🎯 **Budget limits** — set per-category monthly ceilings with live progress bars & warnings
-- 💰 **Fixed salary** — set your monthly salary once, edit any time
-- 🍩 **Spending donut** — visual breakdown by category
-- 💾 **localStorage** — all data persists in your browser, nothing sent anywhere
+![Moneta Screenshot](https://via.placeholder.com/800x400.png?text=Moneta+Finance+Dashboard)
 
-## Getting Started
+## ✨ Core Features
 
-```bash
-# 1. Install dependencies
-npm install
+*   📷 **Receipt OCR (Thai & English)** — Drag & drop a receipt photo or Thai banking slip. Tesseract.js reads it locally on your device. Automatically parses Thai dates (Buddhist year conversion) and filters out banking headers.
+*   ✏️ **Inline Editing & Manual Entry** — Log expenses or income in seconds. Hover over any transaction to instantly edit it inline!
+*   📅 **Custom Date & Month Pickers** — Navigate your history with custom-built, dark-mode native pickers.
+*   🎯 **Budget Limits** — Set per-category monthly ceilings with live progress bars and warnings.
+*   🍩 **Dynamic Donut Charts** — Visual breakdown of your spending by category (powered by Recharts).
+*   📱 **Fully Responsive** — Works beautifully on desktop and mobile screens.
+*   💾 **100% Private (localStorage)** — All data persists securely in your browser. Nothing is ever sent to a server.
+*   📂 **Data Backup (Export/Import)** — Safely export your data to a `.json` file and import it anytime.
 
-# 2. Start dev server
-npm run dev
+## 🚀 Getting Started
 
-# 3. Open http://localhost:5173
-```
+1.  **Clone the repository & Install dependencies:**
+    ```bash
+    npm install
+    ```
+2.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+3.  **Open in your browser:**
+    Go to `http://localhost:5173`
 
-## Build for production
+## 🛠️ Tech Stack
+*   **Framework:** React 18 + Vite 5
+*   **Charts:** Recharts
+*   **AI/OCR:** Tesseract.js (On-device)
+*   **Styling:** Vanilla CSS (CSS-in-JS + standard stylesheets)
 
-```bash
-npm run build
-npm run preview
-```
-
-## Tech stack
-- React 18
-- Vite 5
-- Recharts (donut chart)
-- Tesseract.js 5 (on-device OCR)
-- localStorage (persistence)
-
-## Folder structure
-
-```
-src/
-  components/   # Sidebar, StatCard, TxnRow, BudgetBar, AddPanel, DonutPanel
-  pages/        # OverviewPage, TransactionsPage, BudgetsPage, SettingsPage
-  hooks/        # useLocalStorage
-  utils/        # ocr.js (Tesseract wrapper)
-  constants.js  # shared data, helpers
-  styles.js     # shared style tokens
-```
+## 📁 Folder Structure
+*   `src/components/` - Reusable UI elements (Sidebar, StatCards, DatePicker, AddPanel)
+*   `src/pages/` - Main dashboard views (Overview, Transactions, Budgets, Settings)
+*   `src/utils/` - Logic helpers (`ocr.js` for Tesseract integration)
+*   `src/styles.js` - Centralized design system tokens
+*   `src/constants.js` - Shared configurations (Categories, Icons, formatting functions)
