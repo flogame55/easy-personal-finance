@@ -1,9 +1,10 @@
-import { currentMonth, monthLabel, CATS } from '../constants'
+import { monthLabel, CATS } from '../constants'
 import BudgetBar from '../components/BudgetBar'
+import MonthPicker from '../components/MonthPicker'
 import { S } from '../styles'
 
-export default function BudgetsPage({ txns, budgets, onUpdateLimit }) {
-  const month = currentMonth()
+export default function BudgetsPage({ txns, budgets, onUpdateLimit, selectedMonth, setSelectedMonth }) {
+  const month = selectedMonth
 
   const spentFor = (cat) =>
     txns
@@ -14,7 +15,7 @@ export default function BudgetsPage({ txns, budgets, onUpdateLimit }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h1 style={S.pageTitle}>Budgets</h1>
-        <span style={{ fontSize: 12, color: '#475569' }}>{monthLabel(month + '-01')}</span>
+        <MonthPicker value={month} onChange={setSelectedMonth} />
       </div>
 
       <div style={S.panel}>

@@ -214,4 +214,18 @@ export const S = {
     fontSize: 12,
     color: '#4ade80',
   },
+  monthInput: {
+    background: '#151b27',
+    border: '1px solid #1e2537',
+    borderRadius: 8,
+    padding: '5px 10px',
+    color: '#e2e8f0',
+    fontSize: 12,
+    fontFamily: 'inherit',
+    outline: 'none',
+    cursor: 'pointer',
+    colorScheme: 'dark', // helpful for native input
+    userSelect: 'none',
+    WebkitUserSelect: 'none',
+  },
 }

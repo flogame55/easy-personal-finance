@@ -5,12 +5,15 @@ const ACCENTS = {
   default: { bg: '#151b27', val: '#e2e8f0', border: '#1e2537' },
 }
 
-export default function StatCard({ label, value, sub, accent }) {
+export default function StatCard({ label, value, sub, accent, action }) {
   const c = ACCENTS[accent] || ACCENTS.default
   return (
-    <div style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 14, padding: '16px 18px' }}>
-      <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-        {label}
+    <div style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: 14, padding: '16px 18px', position: 'relative' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+        <div style={{ fontSize: 11, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          {label}
+        </div>
+        {action && <div>{action}</div>}
       </div>
       <div style={{ fontSize: 26, fontWeight: 700, color: c.val, fontVariantNumeric: 'tabular-nums' }}>{value}</div>
       {sub && <div style={{ fontSize: 11, color: '#475569', marginTop: 4 }}>{sub}</div>}

@@ -1,19 +1,26 @@
 import { useState } from 'react'
 import { CATS } from '../constants'
 import TxnRow from '../components/TxnRow'
+import MonthPicker from '../components/MonthPicker'
 import { S } from '../styles'
 
 const FILTERS = ['All', 'Income', ...CATS]
 
-export default function TransactionsPage({ txns, onDelete }) {
+export default function TransactionsPage({ txns, onDelete, onUpdate, selectedMonth, setSelectedMonth }) {
   const [filter, setFilter] = useState('All')
 
-  const sorted   = [...txns].sort((a, b) => b.date.localeCompare(a.date))
+  const month = selectedMonth
+  const monthTxns = txns.filter((t) => t.date.startsWith(month))
+
+  const sorted   = [...monthTxns].sort((a, b) => b.date.localeCompare(a.date))
   const filtered = filter === 'All' ? sorted : sorted.filter((t) => t.cat === filter)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <h1 style={S.pageTitle}>Transactions</h1>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 style={S.pageTitle}>Transactions</h1>
+        <MonthPicker value={month} onChange={setSelectedMonth} />
+      </div>
 
       {/* filter pills */}
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -37,10 +44,10 @@ export default function TransactionsPage({ txns, onDelete }) {
       <div style={S.panel}>
         {filtered.length === 0 && (
           <div style={{ color: '#475569', fontSize: 13, textAlign: 'center', padding: '28px 0' }}>
-            No transactions found.
+            No transactions found for this month.
           </div>
         )}
-        {filtered.map((t) => <TxnRow key={t.id} txn={t} onDelete={onDelete} />)}
+        {filtered.map((t) => <TxnRow key={t.id} txn={t} onDelete={onDelete} onUpdate={onUpdate} />)}
       </div>
     </div>
   )

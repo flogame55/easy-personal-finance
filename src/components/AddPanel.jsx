@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { CATS, CAT_ICONS, todayStr } from '../constants'
 import { parseReceipt } from '../utils/ocr'
+import DatePicker from './DatePicker'
 import { S } from '../styles'
 
 function CatGrid({ gridId, selected, onSelect }) {
@@ -167,7 +168,7 @@ export default function AddPanel({ onAdd }) {
                 </div>
                 <div style={S.fg}>
                   <label style={S.lbl}>Date</label>
-                  <input type="date" value={scanDate} onChange={(e) => setScanDate(e.target.value)} style={S.input} />
+                  <DatePicker value={scanDate} onChange={setScanDate} />
                 </div>
               </div>
               <div style={S.fg}>
@@ -205,7 +206,7 @@ export default function AddPanel({ onAdd }) {
             </div>
             <div style={S.fg}>
               <label style={S.lbl}>Date</label>
-              <input type="date" value={date} onChange={(e) => setDate(e.target.value)} style={S.input} />
+              <DatePicker value={date} onChange={setDate} />
             </div>
           </div>
           <div style={S.fg}>
