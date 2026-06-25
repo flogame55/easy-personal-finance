@@ -17,8 +17,8 @@ export default function TransactionsPage({ txns, onDelete, onUpdate, selectedMon
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h1 style={S.pageTitle}>Transactions</h1>
+      <div className="page-header-bar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 className="page-title-mobile" style={S.pageTitle}>Transactions</h1>
         <MonthPicker value={month} onChange={setSelectedMonth} />
       </div>
 

@@ -9,6 +9,8 @@ body {
   background: #0d1117;
   color: #e2e8f0;
   -webkit-font-smoothing: antialiased;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -16,38 +18,224 @@ input[type=number]::-webkit-outer-spin-button {
   opacity: 0.4;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #090d14; }
+::-webkit-scrollbar-thumb { background: #1e2537; border-radius: 99px; }
+
+input, button, select { font-family: inherit; }
+
+/* ── Mobile touch targets ──────────────────────────────── */
+/* Ensure buttons are large enough for fingers */
+button { min-height: 36px; }
+
+/* ── Responsive Shell ──────────────────────────────────── */
+.shell-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  width: 100%;
+  min-height: 100vh;
 }
-::-webkit-scrollbar-track {
+
+/* Desktop main padding */
+.shell-main {
+  padding: 28px;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+/* ── Sidebar (Desktop) ─────────────────────────────────── */
+.sidebar-nav {
   background: #090d14;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e2537;
-  border-radius: 99px;
+  border-right: 1px solid #1e2537;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-input, button, select {
-  font-family: inherit;
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px 18px;
+  border-bottom: 1px solid #1e2537;
+  margin-bottom: 8px;
 }
 
-@media (max-width: 800px) {
+.sidebar-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #475569;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s;
+  min-height: auto;
+}
+
+.sidebar-nav-btn-active {
+  background: #0f1a2e;
+  color: #60a5fa;
+  border-right: 2px solid #60a5fa;
+}
+
+.sidebar-nav-icon { font-size: 16px; }
+
+/* ── Stat Cards Grid ──────────────────────────────────── */
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ── Add Panel + Donut ────────────────────────────────── */
+.responsive-grid-panel {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 14px;
+}
+
+/* ── TxnRow actions: always hidden on desktop, shown via hover ──── */
+.txn-actions-always { display: none !important; }
+.txn-actions-hover  { display: flex; }
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE  ≤ 768px  (iPhone 16 Plus = 430px wide)
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Shell: flex column, sidebar moves to bottom */
+  .shell-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100dvh !important;
+  }
+
+  /* Main content fills all space, sidebar sits below */
+  .shell-main {
+    flex: 1 !important;
+    order: 1 !important;
+    padding: 16px !important;
+    padding-bottom: 76px !important;
+    overflow-y: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Sidebar becomes a fixed bottom tab bar */
+  .sidebar-nav {
+    order: 2 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 60px !important;
+    flex-direction: row !important;
+    overflow: visible !important;
+    border-right: none !important;
+    border-top: 1px solid #1e2537 !important;
+    padding: 0 !important;
+    z-index: 200 !important;
+    background: rgba(9, 13, 20, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    align-items: stretch !important;
+    justify-content: space-around !important;
+    position: fixed !important;
+    /* Remove sticky/column from desktop */
+    flex-shrink: 0 !important;
+  }
+
+  /* Hide logo on mobile */
+  .sidebar-logo { display: none !important; }
+
+  /* Nav buttons fill the bottom bar evenly */
+  .sidebar-nav-btn {
+    flex: 1 !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+    padding: 8px 4px !important;
+    font-size: 10px !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    width: auto !important;
+    color: #64748b !important;
+  }
+
+  .sidebar-nav-btn-active {
+    color: #60a5fa !important;
+    border-right: none !important;
+    border-top: 2px solid #60a5fa !important;
+    background: transparent !important;
+  }
+
+  /* Nav icon bigger on mobile */
+  .sidebar-nav-icon { font-size: 18px !important; }
+
+  /* Stat cards: 2 columns */
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  /* Add panel + donut stacks vertically */
+  .responsive-grid-panel {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Page titles */
+  .page-title-mobile { font-size: 18px !important; }
+
+  /* Top bar wraps on small screens */
+  .page-header-bar {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* TxnRow: always show edit/delete on mobile */
+  .txn-actions-always { display: flex !important; }
+  .txn-actions-hover  { display: none !important; }
+
+  /* MonthPicker dropdown: centered on screen */
+  .month-picker-dropdown {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(280px, 90vw) !important;
+    margin-top: 0 !important;
+    z-index: 300 !important;
+  }
+
+  /* MonthPicker overlay */
+  .month-picker-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 290 !important;
+    background: rgba(0,0,0,0.6) !important;
+  }
+}
+
+/* ── Very small phones ≤ 375px ─────────────────────────── */
+@media (max-width: 375px) {
   .responsive-grid-3 {
     grid-template-columns: 1fr !important;
   }
-  .responsive-grid-panel {
-    grid-template-columns: 1fr !important;
-  }
-  .shell-layout {
-    flex-direction: column !important;
-  }
-  .sidebar-nav {
-    width: 100% !important;
-    height: auto !important;
-    flex-direction: row !important;
-    overflow-x: auto;
-    border-right: none !important;
-    border-bottom: 1px solid #1e2537;
-    padding: 10px !important;
+  .shell-main {
+    padding: 12px !important;
+    padding-bottom: 76px !important;
   }
 }

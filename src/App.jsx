@@ -23,10 +23,10 @@ export default function App() {
   const resetData = ()         => setTxns([])
 
   return (
-    <div style={S.app}>
-      <div className="shell-layout" style={S.shell}>
+    <div style={{ minHeight: '100vh', background: '#0d1117', display: 'flex', fontFamily: "'DM Sans', system-ui, sans-serif" }}>
+      <div className="shell-layout">
         <Sidebar page={page} setPage={setPage} />
-        <main style={S.main}>
+        <main className="shell-main" style={S.main}>
           {page === 'overview'      && <OverviewPage     txns={txns} salary={salary} onAdd={addTxn} onDelete={deleteTxn} onUpdate={updateTxn} setPage={setPage} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} onResetData={resetData} />}
           {page === 'transactions'  && <TransactionsPage txns={txns} onDelete={deleteTxn} onUpdate={updateTxn} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />}
           {page === 'budgets'       && <BudgetsPage      txns={txns} budgets={budgets} onUpdateLimit={updateLimit} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />}

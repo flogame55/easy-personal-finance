@@ -8,10 +8,10 @@ export default function TxnRow({ txn, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false)
 
   // edit states
-  const [editAmt, setEditAmt] = useState(txn.amt)
+  const [editAmt, setEditAmt]   = useState(txn.amt)
   const [editDate, setEditDate] = useState(txn.date)
   const [editDesc, setEditDesc] = useState(txn.desc)
-  const [editCat, setEditCat] = useState(txn.cat)
+  const [editCat, setEditCat]   = useState(txn.cat)
 
   const handleSave = () => {
     const a = parseFloat(editAmt)
@@ -39,19 +39,19 @@ export default function TxnRow({ txn, onDelete, onUpdate }) {
         </div>
         <div style={S.fg}>
           <label style={S.lbl}>Category</label>
-          <select 
-            value={editCat} 
-            onChange={e => setEditCat(e.target.value)} 
+          <select
+            value={editCat}
+            onChange={e => setEditCat(e.target.value)}
             style={{ ...S.input, marginBottom: 12, colorScheme: 'dark' }}
           >
             {txn.type === 'expense' && CATS.map(c => <option key={c} value={c}>{c}</option>)}
-            {txn.type === 'income' && <option value="Income">Income</option>}
+            {txn.type === 'income'  && <option value="Income">Income</option>}
           </select>
         </div>
         <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
           <button onClick={() => setIsEditing(false)} style={S.btnGhost}>Cancel</button>
-          <button 
-            onClick={handleSave} 
+          <button
+            onClick={handleSave}
             disabled={!(parseFloat(editAmt) > 0)}
             style={{ ...S.btnPrimary, width: 'auto', opacity: parseFloat(editAmt) > 0 ? 1 : 0.5, cursor: parseFloat(editAmt) > 0 ? 'pointer' : 'not-allowed' }}
           >
@@ -73,6 +73,7 @@ export default function TxnRow({ txn, onDelete, onUpdate }) {
         transition: 'background 0.15s',
       }}
     >
+      {/* Icon */}
       <div style={{
         width: 38, height: 38, borderRadius: '50%',
         background: txn.type === 'income' ? '#0f2a1a' : '#131c2e',
@@ -81,6 +82,8 @@ export default function TxnRow({ txn, onDelete, onUpdate }) {
       }}>
         {CAT_ICONS[txn.cat]}
       </div>
+
+      {/* Description + meta */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: 13, fontWeight: 500, color: '#e2e8f0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {txn.desc}
@@ -89,18 +92,24 @@ export default function TxnRow({ txn, onDelete, onUpdate }) {
           {txn.cat} · {txn.date}
         </div>
       </div>
-      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+
+      {/* Amount + actions */}
+      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flexShrink: 0 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: txn.type === 'income' ? '#4ade80' : '#f87171', fontVariantNumeric: 'tabular-nums' }}>
           {txn.type === 'income' ? '+' : '−'}{fmt(txn.amt)}
         </div>
-        {hover ? (
-          <div style={{ display: 'flex', gap: 6, marginTop: 2 }}>
-            <button onClick={() => setIsEditing(true)} style={{ fontSize: 10, color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer' }}>✏️ Edit</button>
-            <button onClick={() => onDelete(txn.id)} style={{ fontSize: 10, color: '#f87171', background: 'none', border: 'none', cursor: 'pointer' }}>🗑️ Delete</button>
-          </div>
-        ) : (
-          <div style={{ height: 15 }} />
-        )}
+
+        {/* Desktop: show on hover only */}
+        <div className="txn-actions-hover" style={{ gap: 6, marginTop: 2, display: hover ? 'flex' : 'none' }}>
+          <button onClick={() => setIsEditing(true)} style={{ fontSize: 10, color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px', minHeight: 'auto' }}>✏️ Edit</button>
+          <button onClick={() => onDelete(txn.id)}   style={{ fontSize: 10, color: '#f87171', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px', minHeight: 'auto' }}>🗑️ Del</button>
+        </div>
+
+        {/* Mobile: always visible */}
+        <div className="txn-actions-always" style={{ gap: 6, marginTop: 2 }}>
+          <button onClick={() => setIsEditing(true)} style={{ fontSize: 10, color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px', minHeight: 'auto' }}>✏️</button>
+          <button onClick={() => onDelete(txn.id)}   style={{ fontSize: 10, color: '#f87171', background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px', minHeight: 'auto' }}>🗑️</button>
+        </div>
       </div>
     </div>
   )

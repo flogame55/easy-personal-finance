@@ -31,17 +31,20 @@ export default function MonthPicker({ value, onChange }) {
 
       {open && (
         <>
-          {/* Invisible overlay to close on click outside */}
-          <div 
+          {/* Overlay — click to close, on mobile has dark bg */}
+          <div
+            className="month-picker-overlay"
             onClick={() => setOpen(false)}
             style={{ position: 'fixed', inset: 0, zIndex: 90 }}
           />
-          <div style={{
-            position: 'absolute', top: '100%', right: 0, marginTop: 8,
-            width: 230, background: '#0d1520', border: '1px solid #1e2537',
-            borderRadius: 14, padding: '16px', zIndex: 100,
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)'
-          }}>
+          <div
+            className="month-picker-dropdown"
+            style={{
+              position: 'absolute', top: '100%', right: 0, marginTop: 8,
+              width: 230, background: '#0d1520', border: '1px solid #1e2537',
+              borderRadius: 14, padding: '16px', zIndex: 100,
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)'
+            }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
               <button 
                 onClick={() => setViewYear(v => v - 1)}

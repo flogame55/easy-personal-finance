@@ -56,8 +56,8 @@ export default function OverviewPage({ txns, salary, onAdd, onDelete, onUpdate, 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
       {/* top bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h1 style={S.pageTitle}>Overview</h1>
+      <div className="page-header-bar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 className="page-title-mobile" style={S.pageTitle}>Overview</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <button 
             onClick={() => setShowReset(true)}

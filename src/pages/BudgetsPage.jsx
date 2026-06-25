@@ -13,8 +13,8 @@ export default function BudgetsPage({ txns, budgets, onUpdateLimit, selectedMont
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h1 style={S.pageTitle}>Budgets</h1>
+      <div className="page-header-bar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 className="page-title-mobile" style={S.pageTitle}>Budgets</h1>
         <MonthPicker value={month} onChange={setSelectedMonth} />
       </div>
 
